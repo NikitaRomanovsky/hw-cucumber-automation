@@ -1,0 +1,25 @@
+{
+  "name": "homework-cucumber",
+  "version": "1.0.0",
+  "description": "My home work for cucumber automation",
+  "main": "index.js",
+  "repository": "git@github.com:NikitaRomanovsky/hw-cucumber-automation.git",
+  "author": "NikitaR",
+  "license": "MIT",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^8.31.1",
+    "@wdio/cli": "^8.31.1",
+    "@wdio/cucumber-framework": "^8.31.1",
+    "@wdio/local-runner": "^8.31.1",
+    "@wdio/spec-reporter": "^8.31.1"
+  },
+  "scripts": {
+    "wdio": "wdio run ./wdio.conf.js",
+    "loginPage": "wdio run wdio.conf.js --spec login.feature",
+    "checkboxPage": "wdio run wdio.conf.js --spec checkbox.feature",
+    "keysPage": "wdio run wdio.conf.js --spec keys.feature",
+    "usersPage": "wdio run wdio.conf.js --spec users.feature",
+    "manageElementsPage": "wdio run wdio.conf.js --spec manage-elements.feature",
+    "test": "wdio wdio.conf.js --cucumberOpts.tagExpression"
+  }
+}
