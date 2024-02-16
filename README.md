@@ -4,8 +4,7 @@ This project covers 5 test cases.
 For all test cases a proper gherkin story is written.  
 Which then are automated using WDIO.  
   
-To make project work run the following commands after clonning the repo:  
-- yarn init  
+To make project work run the following command after clonning the repo:    
 - yarn install  
   
 Each feature file has respective @tag to run a specific test case.  
