@@ -1,10 +1,19 @@
-exports.config = {
+import type { Options } from '@wdio/types'
+export const config: Options.Testrunner = {
     //
     // ====================
     // Runner Configuration
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
+    autoCompileOpts: {
+        autoCompile: true,
+        tsNodeOpts: {
+            project: './tsconfig.json',
+            transpileOnly: true
+        }
+    },
+    
     //
     // ==================
     // Specify Test Files
@@ -84,7 +93,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    // baseUrl: 'http://localhost:8080',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -128,7 +137,7 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./features/step-definitions/*.js'],
+        require: ['./features/step-definitions/*.ts'],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -137,6 +146,8 @@ exports.config = {
         dryRun: false,
         // <boolean> abort the run on first failure
         failFast: false,
+        // <string[]> Only execute the scenarios with name matching the expression (repeatable).
+        name: [],
         // <boolean> hide step definition snippets for pending steps
         snippets: true,
         // <boolean> hide source uris
@@ -144,12 +155,13 @@ exports.config = {
         // <boolean> fail if there are any undefined or pending steps
         strict: false,
         // <string> (expression) only execute the features or scenarios with tags matching the expression
-        // tagExpression:
+        tagExpression: '',
         // <number> timeout for step definitions
         timeout: 60000,
         // <boolean> Enable this config to treat undefined definitions as warnings.
         ignoreUndefinedDefinitions: false
     },
+
 
     //
     // =====

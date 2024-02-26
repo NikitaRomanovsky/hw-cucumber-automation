@@ -1,5 +1,5 @@
-const { Given, When, Then } = require('@wdio/cucumber-framework');
-const { expect, $ } = require('@wdio/globals')
+import { Given, When, Then } from '@wdio/cucumber-framework';
+import { expect, $ } from '@wdio/globals'
 
 When("I click on Add Element button", async () => {
     await $('//*[@id="content"]/div/button').click()
