@@ -30,7 +30,7 @@ This project implements tests for:
 ## 💻 **Setup Instructions**
 
 ### 1. Clone the repository
-git clone https://github.com/NikitaRomanovsky/hw-cucumber-automation.git
+git clone https://github.com/NikitaRomanovsky/wdio-cucumber-automation.git
 
 ### 2. Install dependencies
 yarn install
