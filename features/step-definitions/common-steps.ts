@@ -1,7 +1,5 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
-import { expect, $ } from '@wdio/globals'
+import { Given } from '@wdio/cucumber-framework';
 
-
-Given("I am on the {string} page", async (page: string) => {
-    await browser.url(`https://the-internet.herokuapp.com/${page}`);
+Given('I am on the {string} page', async (page: string) => {
+	await browser.url(`https://the-internet.herokuapp.com/${page}`);
 });

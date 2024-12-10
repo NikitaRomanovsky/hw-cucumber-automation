@@ -1,13 +1,17 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
-import { expect, $ } from '@wdio/globals'
+import { Then, When } from '@wdio/cucumber-framework';
+import { EXPECTED_LOCATORS } from '../../src/util/locators';
 
 When('I enter {string} into input field', async (word: string) => {
-  await $('//*[@id="target"]').click();
-  browser.keys(word);
+	await browser.VerifyElementExisting(EXPECTED_LOCATORS.inputField);
+	await browser.ClickOnElement(EXPECTED_LOCATORS.inputField);
+	await browser.TypeText(EXPECTED_LOCATORS.inputField, word);
 });
 
 Then('I should see a last pressed key - {word}', async (key: string) => {
-  const element = await $('//*[@id="result"]');
-  await expect(element).toBeExisting();
-  await expect(element).toHaveText(expect.stringContaining(key));
+	await browser.VerifyElementExisting(EXPECTED_LOCATORS.lastEneteredKeyResult);
+	await browser.ClickOnElement(EXPECTED_LOCATORS.lastEneteredKeyResult);
+	await browser.VerifyElementHasText(
+		EXPECTED_LOCATORS.lastEneteredKeyResult,
+		`You entered: ${key}`
+	);
 });

@@ -1,12 +1,25 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
-import { expect, $ } from '@wdio/globals'
+import { Then, When } from '@wdio/cucumber-framework';
+import { EXPECTED_LOCATORS } from '../../src/util/locators';
 
-When("I click on Add Element button", async () => {
-    await $('//*[@id="content"]/div/button').click()
+When('I click on Add Element button', async () => {
+	await browser.VerifyElementExisting(EXPECTED_LOCATORS.addElementButton);
+	await browser.ClickOnElement(EXPECTED_LOCATORS.addElementButton);
+	await browser.ClickOnElement(EXPECTED_LOCATORS.addElementButton);
 });
 
-Then("I should see a new element with Delete button", async () => {
-    const el = await $('//*[@id="elements"]/button[1]')
-    await expect(el).toBeExisting();
-    await expect(el).toHaveText(expect.stringContaining('Delete'))
+Then('I should see new elements with Delete button', async () => {
+	await browser.VerifyElementExisting(
+		EXPECTED_LOCATORS.deleteElementButton + '[1]'
+	);
+	await browser.VerifyElementExisting(
+		EXPECTED_LOCATORS.deleteElementButton + '[2]'
+	);
+	await browser.VerifyElementHasText(
+		EXPECTED_LOCATORS.deleteElementButton + '[1]',
+		'Delete'
+	);
+	await browser.VerifyElementHasText(
+		EXPECTED_LOCATORS.deleteElementButton + '[2]',
+		'Delete'
+	);
 });

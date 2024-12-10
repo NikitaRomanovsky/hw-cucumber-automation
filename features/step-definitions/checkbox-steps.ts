@@ -1,21 +1,22 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
-import { expect, $ } from '@wdio/globals'
+import { Then, When } from '@wdio/cucumber-framework';
+import { EXPECTED_LOCATORS } from '../../src/util/locators';
 
+When('I click on unchecked box', async () => {
+	await browser.ClickOnElement(EXPECTED_LOCATORS.checkboxElement + '[1]');
+});
 
-When('I click on {word} box', async (state: string) => {
-    if(state === 'unchecked') {
-        await $('//*[@id="checkboxes"]/input[1]').click()
-    } else if (state === 'checked') {
-        await $('//*[@id="checkboxes"]/input[1]').doubleClick()
-    }
-})
+When('I click on checked box', async () => {
+	await browser.ClickOnElement(EXPECTED_LOCATORS.checkboxElement + '[2]');
+});
 
-Then('I should see checkbox to be {word}', async (status: string) => {
-    if(status === 'checkmarked') {
-        const element = await $('//*[@id="checkboxes"]/input[1]').isSelected()
-        await expect(element).toBeTruthy()
-    } else if (status === 'uncheckmarked') {
-       const element = await $('//*[@id="checkboxes"]/input[1]').isSelected()
-       await expect(element).toBeFalsy()
-    }
-})
+Then('I should see checkbox to be checkmarked', async () => {
+	await browser.VerifyCheckboxIsSelected(
+		EXPECTED_LOCATORS.checkboxElement + '[1]'
+	);
+});
+
+Then('I should see checkbox to be uncheckmarked', async () => {
+	await browser.VerifyCheckboxIsNotSelected(
+		EXPECTED_LOCATORS.checkboxElement + '[2]'
+	);
+});

@@ -1,18 +1,31 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
-import { expect, $ } from '@wdio/globals'
+import { Then, When } from '@wdio/cucumber-framework';
+import { EXPECTED_LOCATORS } from '../../src/util/locators';
 
 When('I hover on user {int}', async (id: number) => {
-    await $(`//*[@id="content"]/div/div[${id}]/img`).moveTo()
-})
+	await browser.VerifyElementExisting(EXPECTED_LOCATORS.userImage + `[${id}]`);
+	await browser.HoverMouseOnElement(EXPECTED_LOCATORS.userImage + `[${id}]`);
+});
 
 Then('I should see its name: user{int}', async (id: number) => {
-    const name = await $(`//*[@id="content"]/div/div[${id}]/div/h5`)
-    await expect(name).toBeExisting();
-    await expect(name).toHaveText(expect.stringContaining(`name: user${id}`))
-})
+	await browser.VerifyElementExisting(
+		EXPECTED_LOCATORS.userPersonalInfo + `[${id}]`
+	);
+	await browser.VerifyElementHasText(
+		EXPECTED_LOCATORS.userPersonalInfo + `[${id}]`,
+		`name: user${id}`
+	);
+});
 
 Then('I should see view profile link for user {int}', async (id: number) => {
-    const link = await $(`//*[@id="content"]/div/div[${id}]/div/a`)
-    await expect(link).toBeExisting();
-    await expect(link).toHaveText(expect.stringContaining('View profile'))
-})
+	await browser.VerifyElementExisting(
+		EXPECTED_LOCATORS.userViewProfileLink + `[${id}]`
+	);
+	await browser.VerifyElementHasText(
+		EXPECTED_LOCATORS.userViewProfileLink + `[${id}]`,
+		'View profile'
+	);
+	await browser.VerifyTextElementIsLink(
+		EXPECTED_LOCATORS.userViewProfileLink + `[${id}]`,
+		`/users/${id}`
+	);
+});
